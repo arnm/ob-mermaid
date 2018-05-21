@@ -1,0 +1,21 @@
+
+* ob-mermaid
+
+Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-babel and [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]].
+
+* Setup
+
+1. Install [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]]
+2. Specify =mmdc= executable path:
+  #+begin_src elisp
+  (setq org-mermaid-path "/your-installating-path/node_modules/.bin/mmdc")
+  #+end_src
+3. Open =org-mode= buffer and create a =org-babel= source block:
+  : #+begin_src mermaid :file test.png
+  : sequenceDiagram
+  :  A-->B: Works!
+  : #+end_src
+
+Now exporting the =org-mode= document and/or invoking the =org-babel-execute-src-block= function
+will generate the mermaid diagram.
+
