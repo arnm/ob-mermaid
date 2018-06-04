@@ -41,6 +41,12 @@
   :group 'org-babel
   :type 'string)
 
+(defcustom ob-mermaid-sandbox-wordaround nil
+  "An option to toggle workaround of Linux kernal sandbox issue."
+  :type 'boolean
+  :safe #'booleanp
+  :group 'org-babel)
+
 (defun org-babel-execute:mermaid (body params)
   (let* ((out-file (or (cdr (assoc :file params))
                        (error "mermaid requires a \":file\" header argument")))
@@ -48,6 +54,9 @@
          (cmd (if (not ob-mermaid-cli-path)
                   (error "`ob-mermaid-cli-path' is not set")
                 (concat (shell-quote-argument (expand-file-name ob-mermaid-cli-path))
+                        (if ob-mermaid-sandbox-wordaround
+                            " -p ~/.puppeteer-config.json "
+                          "")
                         " -i " (org-babel-process-file-name temp-file)
                         " -o " (org-babel-process-file-name out-file)))))
     (unless (file-exists-p ob-mermaid-cli-path)
