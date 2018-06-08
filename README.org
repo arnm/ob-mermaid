@@ -5,12 +5,13 @@ Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-
 
 * Setup
 
-1. Install [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]]
-2. Specify =mmdc= executable path:
+1. Install package from [[https://melpa.org/#/getting-started][Melpa]]
+2. Install [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]]
+3. Specify =mmdc= executable path:
   #+begin_src elisp
   (setq ob-mermaid-cli-path "/your-installating-path/node_modules/.bin/mmdc")
   #+end_src
-3. Open =org-mode= buffer and create a =org-babel= source block:
+4. Open =org-mode= buffer and create a =org-babel= source block:
   : #+begin_src mermaid :file test.png
   : sequenceDiagram
   :  A-->B: Works!
