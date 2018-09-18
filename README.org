@@ -5,6 +5,8 @@ Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-
 
 * Setup
 
+If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https://github.com/arnm/mermaid-layer][mermaid Spacemacs layer]].
+
 1. Install package from [[https://melpa.org/#/getting-started][Melpa]]
 2. Install [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]]
 3. Specify =mmdc= executable path:
@@ -12,11 +14,9 @@ Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-
   (setq ob-mermaid-cli-path "/your-installating-path/node_modules/.bin/mmdc")
   #+end_src
 4. Open =org-mode= buffer and create a =org-babel= source block:
-  : #+begin_src mermaid :file test.png
-  : sequenceDiagram
-  :  A-->B: Works!
-  : #+end_src
-
-Now exporting the =org-mode= document and/or invoking the =org-babel-execute-src-block= function
-will generate the mermaid diagram.
+   #+begin_src mermaid :file test.png
+   sequenceDiagram
+    A-->B: Works!
+   #+end_src
+5. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
 
