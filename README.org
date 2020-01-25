@@ -20,3 +20,13 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
    #+end_src
 5. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
 
+* Supported properties
+
+=file= - Output file. It should be either svg, png or pdf.
+=width= - Width of the page. Optional.
+=height= - Height of the page. Optional.
+=theme= - Theme of the chart, could be default, forest, dark or neutral. Optional.
+=background-color= - Background color. Example: transparent, red, '#F0F0F0'. Optional.
+=mermaid-config-file= - JSON configuration file for mermaid. Optional.
+=css-file= - CSS file for the page. Optional.
+=pupeteer-config-file= - JSON configuration file for puppeteer. Optional.
