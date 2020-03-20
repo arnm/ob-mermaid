@@ -69,7 +69,9 @@
 		      (when mermaid-config-file
 			(concat " -c " (org-babel-process-file-name mermaid-config-file)))
 		      (when css-file
-			(concat " -C " (org-babel-process-file-name css-file))))))
+			(concat " -C " (org-babel-process-file-name css-file)))
+                      (when pupeteer-config-file
+                        (concat " -p " (org-babel-process-file-name pupeteer-config-file))))))
     (unless (file-executable-p mmdc)
       ;; cannot happen with `executable-find', so we complain about
       ;; `ob-mermaid-cli-path'
