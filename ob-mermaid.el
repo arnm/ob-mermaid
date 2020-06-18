@@ -63,9 +63,9 @@
 		      (when background-color
 			(concat " -b " background-color))
 		      (when width
-			(concat " -w " width))
+			(format " -w \"%d\"" width))
 		      (when height
-			(concat " -H " height))
+			(format " -H \"%d\"" height))
 		      (when mermaid-config-file
 			(concat " -c " (org-babel-process-file-name mermaid-config-file)))
 		      (when css-file
