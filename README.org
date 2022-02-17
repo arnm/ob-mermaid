@@ -23,10 +23,10 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
   #+end_src
 5. Open =org-mode= buffer and create an =org-babel= source block:
    #+begin_src org
-     \#+begin_src mermaid :file test.png
+     ,#+begin_src mermaid :file test.png
      sequenceDiagram
       A-->B: Works!
-     \#+end_src
+     ,#+end_src
    #+end_src
    #+begin_src mermaid :file test.png
    sequenceDiagram
