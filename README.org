@@ -13,12 +13,26 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
   #+begin_src elisp
   (setq ob-mermaid-cli-path "/your-installating-path/node_modules/.bin/mmdc")
   #+end_src
-4. Open =org-mode= buffer and create a =org-babel= source block:
+4. Add =mermaid= to =org-babel-load-languages=
+  #+begin_src elisp
+    (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((mermaid . t)
+          (scheme . t)
+          (your-other-langs . t)))
+  #+end_src
+5. Open =org-mode= buffer and create an =org-babel= source block:
+   #+begin_src org
+     \#+begin_src mermaid :file test.png
+     sequenceDiagram
+      A-->B: Works!
+     \#+end_src
+   #+end_src
    #+begin_src mermaid :file test.png
    sequenceDiagram
     A-->B: Works!
    #+end_src
-5. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
+6. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
 
 * Supported properties
 
