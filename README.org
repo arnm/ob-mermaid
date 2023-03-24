@@ -42,6 +42,8 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 
 =height= - Height of the page. Optional.
 
+=scale= - Scale factor of the page. Optional.
+
 =theme= - Theme of the chart, could be default, forest, dark or neutral. Optional.
 
 =background-color= - Background color. Example: transparent, red, '#F0F0F0'. Optional.
@@ -51,3 +53,5 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 =css-file= - CSS file for the page. Optional.
 
 =pupeteer-config-file= - JSON configuration file for puppeteer. Optional.
+
+=pdf-fit= - Scale PDF to fit chart. Optional.
