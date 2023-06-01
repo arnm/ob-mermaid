@@ -50,7 +50,7 @@
 	 (background-color (cdr (assoc :background-color params)))
 	 (mermaid-config-file (cdr (assoc :mermaid-config-file params)))
 	 (css-file (cdr (assoc :css-file params)))
-	 (pupeteer-config-file (cdr (assoc :pupeteer-config-file params)))
+	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
          (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc (or ob-mermaid-cli-path
                    (executable-find "mmdc")
@@ -70,8 +70,8 @@
 			(concat " -c " (org-babel-process-file-name mermaid-config-file)))
 		      (when css-file
 			(concat " -C " (org-babel-process-file-name css-file)))
-                      (when pupeteer-config-file
-                        (concat " -p " (org-babel-process-file-name pupeteer-config-file))))))
+                      (when puppeteer-config-file
+                        (concat " -p " (org-babel-process-file-name puppeteer-config-file))))))
     (unless (file-executable-p mmdc)
       ;; cannot happen with `executable-find', so we complain about
       ;; `ob-mermaid-cli-path'
