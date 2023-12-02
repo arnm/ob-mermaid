@@ -51,13 +51,12 @@
 	 (mermaid-config-file (cdr (assoc :mermaid-config-file params)))
 	 (css-file (cdr (assoc :css-file params)))
 	 (pupeteer-config-file (cdr (assoc :pupeteer-config-file params)))
-         (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc (or ob-mermaid-cli-path
                    (executable-find "mmdc")
                    (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'")))
-         (cmd (concat (shell-quote-argument (expand-file-name mmdc))
-                      " -i " (org-babel-process-file-name temp-file)
-                      " -o " (org-babel-process-file-name out-file)
+         (cmd (concat "echo " (shell-quote-argument body) " | "
+                      (shell-quote-argument (expand-file-name mmdc))
+                      " -o " out-file
 		      (when theme
 			(concat " -t " theme))
 		      (when background-color
@@ -71,12 +70,12 @@
 		      (when css-file
 			(concat " -C " (org-babel-process-file-name css-file)))
                       (when pupeteer-config-file
-                        (concat " -p " (org-babel-process-file-name pupeteer-config-file))))))
+                        (concat " -p " (org-babel-process-file-name pupeteer-config-file)))
+                      " -i -")))
     (unless (file-executable-p mmdc)
       ;; cannot happen with `executable-find', so we complain about
       ;; `ob-mermaid-cli-path'
       (error "Cannot find or execute %s, please check `ob-mermaid-cli-path'" mmdc))
-    (with-temp-file temp-file (insert body))
     (message "%s" cmd)
     (org-babel-eval cmd "")
     nil))
