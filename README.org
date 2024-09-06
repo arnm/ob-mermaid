@@ -52,6 +52,6 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 
 =css-file= - CSS file for the page. Optional.
 
-=pupeteer-config-file= - JSON configuration file for puppeteer. Optional.
+=puppeteer-config-file= - JSON configuration file for puppeteer. Optional.
 
 =pdf-fit= - Scale PDF to fit chart. Optional.
