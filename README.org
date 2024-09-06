@@ -1,14 +1,14 @@
 
 * ob-mermaid
 
-Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-babel and [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]].
+Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-babel and [[https://github.com/mermaid-js/mermaid-cli][mermaid-cli]].
 
 * Setup
 
 If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https://github.com/arnm/mermaid-layer][mermaid Spacemacs layer]].
 
 1. Install package from [[https://melpa.org/#/getting-started][Melpa]]
-2. Install [[https://github.com/mermaidjs/mermaid.cli][mermaid.cli]]
+2. Install [[https://github.com/mermaid-js/mermaid-cli][mermaid-cli]]
 3. Specify =mmdc= executable path:
   #+begin_src elisp
   (setq ob-mermaid-cli-path "/your-installating-path/node_modules/.bin/mmdc")
