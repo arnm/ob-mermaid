@@ -55,9 +55,14 @@
 	 (pdf-fit (assoc :pdf-fit params))
          (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc (or ob-mermaid-cli-path
-                   (executable-find "mmdc")
+									 (if (executable-find "mmdc")
+											 (unless (file-executable-p mmdc)
+												 ;; cannot happen with `executable-find', so we complain about
+												 ;; `ob-mermaid-cli-path'
+												 (error "Cannot find or execute %s, please check `ob-mermaid-cli-path'" mmdc))
+										 (executable-find "mmdc"))
                    (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'")))
-         (cmd (concat (shell-quote-argument (expand-file-name mmdc))
+         (cmd (concat mmdc
                       " -i " (org-babel-process-file-name temp-file)
                       " -o " (org-babel-process-file-name out-file)
 		      (when theme
@@ -78,10 +83,6 @@
 			(concat " -C " (org-babel-process-file-name css-file)))
                       (when puppeteer-config-file
                         (concat " -p " (org-babel-process-file-name puppeteer-config-file))))))
-    (unless (file-executable-p mmdc)
-      ;; cannot happen with `executable-find', so we complain about
-      ;; `ob-mermaid-cli-path'
-      (error "Cannot find or execute %s, please check `ob-mermaid-cli-path'" mmdc))
     (with-temp-file temp-file (insert body))
     (message "%s" cmd)
     (org-babel-eval cmd "")
