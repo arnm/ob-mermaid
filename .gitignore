@@ -1,1 +1,15 @@
 node_modules/
+
+.direnv
+.devenv
+
+# Test output files
+test-*.png
+test-*.svg
+test-*.pdf
+
+# Emacs backup and autosave files
+*~
+\#*\#
+
+emacs.d/

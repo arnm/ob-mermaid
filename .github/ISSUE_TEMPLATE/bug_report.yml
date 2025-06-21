@@ -1,0 +1,48 @@
+name: Bug Report
+description: Report a bug with ob-mermaid
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please provide a minimal, reproducible example using the test environment.
+  - type: textarea
+    id: minimal-config
+    attributes:
+      label: Minimal org file to reproduce
+      description: |
+        Paste a minimal org file that demonstrates the issue. Preferably, use test-init.el and describe the steps to reproduce.
+      placeholder: |
+        #+begin_src mermaid :file test.png
+        sequenceDiagram
+          A-->B: Fails!
+        #+end_src
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        How did you run the test? (e.g., using dev-test.sh batch or interactive, Emacs version, OS, etc.)
+      placeholder: |
+        1. Run ./dev-test.sh interactive
+        2. Open my-org-file.org
+        3. Place cursor on block and press C-c C-c
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior / Error Messages
+      description: What actually happened? Paste any error messages here.
+    validations:
+      required: true

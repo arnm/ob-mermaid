@@ -1,4 +1,4 @@
-;;; ob-mermaid.el --- org-babel support for mermaid evaluation
+;;; ob-mermaid.el --- org-babel support for mermaid evaluation  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Alexei Nunez
 
@@ -55,12 +55,7 @@
 	 (pdf-fit (assoc :pdf-fit params))
          (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc (or ob-mermaid-cli-path
-									 (if (executable-find "mmdc")
-											 (unless (file-executable-p mmdc)
-												 ;; cannot happen with `executable-find', so we complain about
-												 ;; `ob-mermaid-cli-path'
-												 (error "Cannot find or execute %s, please check `ob-mermaid-cli-path'" mmdc))
-										 (executable-find "mmdc"))
+                   (executable-find "mmdc")
                    (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'")))
          (cmd (concat mmdc
                       " -i " (org-babel-process-file-name temp-file)
@@ -70,11 +65,11 @@
 		      (when background-color
 			(concat " -b " background-color))
 		      (when width
-			(concat " -w " width))
+			(concat " -w " (if (numberp width) (number-to-string width) width)))
 		      (when height
-			(concat " -H " height))
+			(concat " -H " (if (numberp height) (number-to-string height) height)))
 		      (when scale
-			(concat " -s " (number-to-string scale)))
+			(concat " -s " (if (numberp scale) (number-to-string scale) (number-to-string scale))))
 		      (when pdf-fit
 			(concat " -f "))
 		      (when mermaid-config-file
@@ -89,6 +84,5 @@
     nil))
 
 (provide 'ob-mermaid)
-
 
 ;;; ob-mermaid.el ends here

@@ -1,4 +1,3 @@
-
 * ob-mermaid
 
 Generate [[https://mermaidjs.github.io/][mermaid]] diagrams using org-mode, org-babel and [[https://github.com/mermaid-js/mermaid-cli][mermaid-cli]].
@@ -9,18 +8,21 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 
 1. Install package from [[https://melpa.org/#/getting-started][Melpa]]
 2. Install [[https://github.com/mermaid-js/mermaid-cli][mermaid-cli]]
-3. Specify =mmdc= executable path:
-  #+begin_src elisp
-  (setq ob-mermaid-cli-path "/your-installating-path/node_modules/.bin/mmdc")
-  #+end_src
-4. Add =mermaid= to =org-babel-load-languages=
-  #+begin_src elisp
-    (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((mermaid . t)
-          (scheme . t)
-          (your-other-langs . t)))
-  #+end_src
+3. Ensure =mmdc= (the mermaid-cli executable) is available in your PATH, or specify its full path:
+   #+begin_src elisp
+   ;; If mmdc is in your PATH, this is optional:
+   (setq ob-mermaid-cli-path "mmdc")
+   ;; Or specify the full path if needed:
+   ;; (setq ob-mermaid-cli-path "/your-installation-path/node_modules/.bin/mmdc")
+   #+end_src
+4. Add =mermaid= to =org-babel-load-languages= (along with any other languages you use):
+   #+begin_src elisp
+   (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((mermaid . t)
+         (scheme . t)
+         (your-other-langs . t)))
+   #+end_src
 5. Open =org-mode= buffer and create an =org-babel= source block:
    #+begin_src org
      ,#+begin_src mermaid :file test.png
@@ -32,7 +34,7 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
    sequenceDiagram
     A-->B: Works!
    #+end_src
-6. Exporting the =org-mode= document or invoking the =org-babel-execute-src-block= function to generate diagram.
+6. Export the =org-mode= document or invoke =org-babel-execute-src-block= (e.g. with =C-c C-c= on a block) to generate the diagram.
 
 * Supported properties
 
@@ -55,3 +57,38 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 =puppeteer-config-file= - JSON configuration file for puppeteer. Optional.
 
 =pdf-fit= - Scale PDF to fit chart. Optional.
+
+* Testing
+
+** Automated Batch Test
+
+To run all test diagrams and verify outputs:
+
+#+begin_src shell
+./dev-test.sh batch
+#+end_src
+
+This will:
+- Execute all Mermaid code blocks in =test-example.org=
+- Generate output files (PNG, SVG, PDF) for each block
+- Report which files were created or missing
+
+Clean up all generated test files with:
+
+#+begin_src shell
+./dev-test.sh clean
+#+end_src
+
+** Manual/Interactive Test
+
+To open Emacs with the test environment and test interactively:
+
+#+begin_src shell
+./dev-test.sh interactive
+#+end_src
+
+This will open Emacs with =test-example.org= loaded. Place the cursor on any Mermaid code block and press =C-c C-c= to execute and generate the diagram.
+
+** Note
+
+Test outputs (e.g., =test-*.png=, =test-*.svg=, =test-*.pdf=) and Emacs backup files are git-ignored and cleaned by the script.

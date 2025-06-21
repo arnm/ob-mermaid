@@ -1,0 +1,184 @@
+#+TITLE: ob-mermaid Test Examples
+#+AUTHOR: Test Suite
+#+DATE: [2024-01-01]
+
+* ob-mermaid Test Examples
+
+This file contains various mermaid diagram examples to test the ob-mermaid package functionality.
+
+** Basic Sequence Diagram
+
+#+begin_src mermaid :file test-sequence.png
+sequenceDiagram
+    participant A as Alice
+    participant B as Bob
+    A->>B: Hello Bob, how are you?
+    B-->>A: Great!
+#+end_src
+
+#+RESULTS:
+[[file:test-sequence.png]]
+
+** Flowchart
+
+#+begin_src mermaid :file test-flowchart.png
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+#+end_src
+
+#+RESULTS:
+[[file:test-flowchart.png]]
+
+** Class Diagram
+
+#+begin_src mermaid :file test-class.svg
+classDiagram
+    class Animal {
+        +String name
+        +int age
+        +makeSound()
+    }
+    class Dog {
+        +String breed
+        +bark()
+    }
+    Animal <|-- Dog
+#+end_src
+
+#+RESULTS:
+[[file:test-class.svg]]
+
+** Gantt Chart
+
+#+begin_src mermaid :file test-gantt.png
+gantt
+    title Development Schedule
+    dateFormat  YYYY-MM-DD
+    section Planning
+    Research           :done, des1, 2024-01-01, 2024-01-03
+    Analysis           :active, des2, 2024-01-04, 3d
+    section Development
+    Coding             :des3, after des2, 5d
+    Testing            :des4, after des3, 3d
+#+end_src
+
+#+RESULTS:
+[[file:test-gantt.png]]
+
+** Git Graph
+
+#+begin_src mermaid :file test-git.png
+gitGraph
+    commit
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+#+end_src
+
+#+RESULTS:
+[[file:test-git.png]]
+
+** With Theme and Styling Options
+
+#+begin_src mermaid :file test-themed.png :theme dark :background-color transparent :width 800 :height 600
+flowchart LR
+    A[Dark Theme] --> B[Transparent Background]
+    B --> C[Custom Size]
+    C --> A
+#+end_src
+
+#+RESULTS:
+[[file:test-themed.png]]
+
+** With Scale Option
+
+#+begin_src mermaid :file test-scaled.png :scale 2
+pie title Scaled Diagram
+    "A" : 42.96
+    "B" : 50.05
+    "C" : 6.99
+#+end_src
+
+#+RESULTS:
+[[file:test-scaled.png]]
+
+** PDF Output Test
+
+#+begin_src mermaid :file test-output.pdf :pdf-fit t
+mindmap
+  root((Test))
+    Feature A
+      Sub A1
+      Sub A2
+    Feature B
+      Sub B1
+    Feature C
+#+end_src
+
+#+RESULTS:
+[[file:test-output.pdf]]
+
+** User Journey
+
+#+begin_src mermaid :file test-journey.png
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+#+end_src
+
+#+RESULTS:
+[[file:test-journey.png]]
+
+** State Diagram
+
+#+begin_src mermaid :file test-state.svg
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
+#+end_src
+
+#+RESULTS:
+[[file:test-state.svg]]
+
+* Testing Instructions
+
+1. Place cursor on any code block above
+2. Press =C-c C-c= to execute
+3. Check that the output file is generated
+4. Verify the diagram appears correctly
+
+* Expected Behavior
+
+- Each code block should generate the specified output file
+- Files should be created in the current directory
+- Different formats (PNG, SVG, PDF) should all work
+- Theme and styling options should be applied correctly
+- No errors should appear in the *Messages* buffer
+
+* Troubleshooting
+
+If you encounter issues:
+
+1. Check that =mmdc= is in your PATH: =M-x shell-command RET which mmdc=
+2. Verify =ob-mermaid-cli-path= is set correctly: =C-h v ob-mermaid-cli-path=
+3. Check the *Messages* buffer for error output
+4. Try running =mmdc --version= in a shell to verify installation
