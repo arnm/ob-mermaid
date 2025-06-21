@@ -54,9 +54,13 @@
 	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
 	 (pdf-fit (assoc :pdf-fit params))
          (temp-file (org-babel-temp-file "mermaid-"))
+         (mmdc-path (executable-find "mmdc"))
          (mmdc (or ob-mermaid-cli-path
-                   (executable-find "mmdc")
-                   (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'")))
+                   (if mmdc-path
+                       (if (file-executable-p mmdc-path)
+                           mmdc-path
+                         (error "Found mmdc at %s but it's not executable" mmdc-path))
+                     (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'"))))
          (cmd (concat mmdc
                       " -i " (org-babel-process-file-name temp-file)
                       " -o " (org-babel-process-file-name out-file)
