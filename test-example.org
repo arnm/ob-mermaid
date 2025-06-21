@@ -159,6 +159,55 @@ stateDiagram-v2
 #+RESULTS:
 [[file:test-state.svg]]
 
+*** Basic :cmdline with PDF fit option
+
+#+begin_src mermaid :file test-cmdline-pdffit.pdf :cmdline "-f"
+graph TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]
+    C --> E[End]
+    D --> E
+#+end_src
+
+#+RESULTS:
+[[file:test-cmdline-pdffit.pdf]]
+
+*** :cmdline with multiple arguments
+
+#+begin_src mermaid :file test-cmdline-multiple.png :cmdline "--scale 2 --theme dark"
+sequenceDiagram
+    participant A as Alice
+    participant B as Bob
+    A->>B: Hello Bob, how are you?
+    B-->>A: Great!
+#+end_src
+
+#+RESULTS:
+[[file:test-cmdline-multiple.png]]
+
+*** :cmdline combined with existing parameters
+
+#+begin_src mermaid :file test-cmdline-combined.svg :theme forest :cmdline "--backgroundColor white"
+pie title Pet Survey
+    "Dogs" : 42.96
+    "Cats" : 50.05
+    "Birds" : 6.99
+#+end_src
+
+#+RESULTS:
+[[file:test-cmdline-combined.svg]]
+
+*** Empty :cmdline (should work without issues)
+
+#+begin_src mermaid :file test-cmdline-empty.png :cmdline ""
+flowchart LR
+    A --> B --> C
+#+end_src
+
+#+RESULTS:
+[[file:test-cmdline-empty.png]]
+
 * Testing Instructions
 
 1. Place cursor on any code block above

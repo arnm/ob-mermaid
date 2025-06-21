@@ -57,6 +57,7 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 =puppeteer-config-file= - JSON configuration file for puppeteer. Optional.
 
 =pdf-fit= - Scale PDF to fit chart. Optional.
+=cmdline= - Additional command line arguments to pass to mmdc. Optional.
 
 * Testing
 

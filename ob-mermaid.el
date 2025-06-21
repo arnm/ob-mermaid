@@ -23,6 +23,18 @@
 ;;; Commentary:
 
 ;; Org-Babel support for evaluating mermaid diagrams.
+;;
+;; Supported header arguments:
+;; :file - Output file (required)
+;; :theme - Mermaid theme
+;; :width, :height - Diagram dimensions
+;; :scale - Scale factor
+;; :background-color - Background color
+;; :mermaid-config-file - Mermaid config file
+;; :css-file - CSS file for styling
+;; :puppeteer-config-file - Puppeteer config file
+;; :pdf-fit - Enable PDF fit mode
+;; :cmdline - Additional command line arguments
 
 ;;; Requirements:
 
@@ -53,6 +65,7 @@
 	 (css-file (cdr (assoc :css-file params)))
 	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
 	 (pdf-fit (assoc :pdf-fit params))
+	 (cmdline (cdr (assoc :cmdline params)))
          (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc-path (executable-find "mmdc"))
          (mmdc (or ob-mermaid-cli-path
@@ -81,7 +94,9 @@
 		      (when css-file
 			(concat " -C " (org-babel-process-file-name css-file)))
                       (when puppeteer-config-file
-                        (concat " -p " (org-babel-process-file-name puppeteer-config-file))))))
+                        (concat " -p " (org-babel-process-file-name puppeteer-config-file)))
+		      (when cmdline
+			(concat " " cmdline)))))
     (with-temp-file temp-file (insert body))
     (message "%s" cmd)
     (org-babel-eval cmd "")
