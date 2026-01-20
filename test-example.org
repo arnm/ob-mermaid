@@ -220,6 +220,21 @@ flowchart LR
 #+RESULTS:
 [[file:test-svg-emacs.svg]]
 
+** STDIN Piping with Special Characters
+
+Tests that STDIN piping handles special shell characters correctly (quotes, ampersands, etc.)
+
+#+begin_src mermaid :file test-stdin-special-chars.png
+flowchart TD
+    A["User's Input"] --> B{"Is it valid?"}
+    B -->|"Yes & proceed"| C["Process $data"]
+    B -->|"No (retry)"| A
+    C --> D["`Done!`"]
+#+end_src
+
+#+RESULTS:
+[[file:test-stdin-special-chars.png]]
+
 * Testing Instructions
 
 1. Place cursor on any code block above
