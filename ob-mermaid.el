@@ -91,7 +91,7 @@ For htmlLabels specifically, see URL
                          (error "Found mmdc at %s but it's not executable" mmdc-path))
                      (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'"))))
          (cmd (concat "echo " (shell-quote-argument body) " | "
-                      (shell-quote-argument (expand-file-name mmdc))
+                      (shell-quote-argument mmdc)
                       " -o " (org-babel-process-file-name out-file)
                       " -i -"
 		      (when theme
