@@ -1,0 +1,24 @@
+[settings]
+experimental = true
+
+[plugins]
+nix = "https://github.com/jbadeau/mise-nix"
+
+[tools]
+node = "22"
+"nix:emacs" = "latest"
+"nix:mermaid-cli" = "latest"
+
+[env]
+_.path = ["node_modules/.bin"]
+
+[hooks.enter]
+shell = "bash"
+script = """
+# Auto-detect Puppeteer-managed Chrome
+DETECTED_CHROME=$(npx puppeteer browsers list 2>/dev/null | grep -m1 'chrome@' | sed -E 's/.*\\(([^)]+)\\) //')
+if [ -n "$DETECTED_CHROME" ]; then
+  export PUPPETEER_EXECUTABLE_PATH="$DETECTED_CHROME"
+  echo "Auto-set PUPPETEER_EXECUTABLE_PATH to $PUPPETEER_EXECUTABLE_PATH"
+fi
+"""

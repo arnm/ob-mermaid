@@ -208,6 +208,18 @@ flowchart LR
 #+RESULTS:
 [[file:test-cmdline-empty.png]]
 
+** SVG with Config File (for Emacs text rendering)
+
+Uses =:mermaid-config-file= to disable HTML labels, ensuring text renders in Emacs.
+
+#+begin_src mermaid :file test-svg-emacs.svg :mermaid-config-file "mermaid-config-emacs.json"
+flowchart LR
+    A[Start] --> B[End]
+#+end_src
+
+#+RESULTS:
+[[file:test-svg-emacs.svg]]
+
 * Testing Instructions
 
 1. Place cursor on any code block above

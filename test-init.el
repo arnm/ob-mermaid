@@ -33,6 +33,10 @@
 (setq org-startup-folded nil)
 (setq org-src-fontify-natively t)
 (setq org-src-tab-acts-natively t)
+(setq org-startup-with-inline-images t)  ; Auto-display inline images
+
+;; Refresh inline images after executing a babel block
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
 ;; Display settings for better testing experience
 (setq inhibit-startup-message t)

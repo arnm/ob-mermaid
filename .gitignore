@@ -1,7 +1,6 @@
 node_modules/
 
-.direnv
-.devenv
+.mise
 
 # Test output files
 test-*.png
