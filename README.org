@@ -60,6 +60,28 @@ If you use [[https://github.com/syl20bnr/spacemacs][Spacemacs]], use the [[https
 
 =cmdline= - Additional command line arguments to pass to mmdc. Optional.
 
+* Customization
+
+=ob-mermaid-cli-path= - Path to the =mmdc= executable. If =nil=, searches =exec-path=.
+
+=ob-mermaid-default-config-file= - Default mermaid configuration file used when no =:mermaid-config-file= header argument is specified. Useful for setting global defaults.
+
+** SVG Text Rendering in Emacs
+
+By default, mermaid uses [[https://mermaid.js.org/config/schema-docs/config-defs-flowchart-diagram-config.html#htmllabels][HTML labels]] (=<foreignObject>=) in SVG output, which Emacs cannot render. To display text properly in SVG diagrams within Emacs, disable HTML labels via a config file:
+
+1. Create a config file (or use the included =mermaid-config-emacs.json=):
+   #+begin_src json
+   { "htmlLabels": false, "flowchart": { "htmlLabels": false } }
+   #+end_src
+
+2. Set the default config in your Emacs init:
+   #+begin_src elisp
+   (setq ob-mermaid-default-config-file "/path/to/mermaid-config-emacs.json")
+   #+end_src
+
+Alternatively, use the =:mermaid-config-file= header argument per-block.
+
 * Testing
 
 ** Automated Batch Test

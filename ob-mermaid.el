@@ -53,6 +53,22 @@
   :group 'org-babel
   :type 'string)
 
+(defcustom ob-mermaid-default-config-file nil
+  "Default mermaid configuration file path.
+Used when no :mermaid-config-file header argument is specified.
+This is useful for setting global defaults like disabling HTML labels
+in SVG output for better Emacs compatibility.
+
+Example config file content:
+  {\"htmlLabels\": false, \"flowchart\": {\"htmlLabels\": false}}
+
+See URL `https://mermaid.js.org/config/schema-docs/config.html'.
+For htmlLabels specifically, see URL
+`https://mermaid.js.org/config/schema-docs/config-defs-flowchart-diagram-config.html#htmllabels'."
+  :group 'org-babel
+  :type '(choice (const :tag "None" nil)
+                 (file :tag "Config file path")))
+
 (defun org-babel-execute:mermaid (body params)
   (let* ((out-file (or (cdr (assoc :file params))
                        (error "mermaid requires a \":file\" header argument")))
@@ -61,7 +77,8 @@
 	 (height (cdr (assoc :height params)))
 	 (scale (cdr (assoc :scale params)))
 	 (background-color (cdr (assoc :background-color params)))
-	 (mermaid-config-file (cdr (assoc :mermaid-config-file params)))
+	 (mermaid-config-file (or (cdr (assoc :mermaid-config-file params))
+                              ob-mermaid-default-config-file))
 	 (css-file (cdr (assoc :css-file params)))
 	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
 	 (pdf-fit (assoc :pdf-fit params))
