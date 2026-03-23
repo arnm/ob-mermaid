@@ -83,7 +83,6 @@ For htmlLabels specifically, see URL
 	 (puppeteer-config-file (cdr (assoc :puppeteer-config-file params)))
 	 (pdf-fit (assoc :pdf-fit params))
 	 (cmdline (cdr (assoc :cmdline params)))
-         (temp-file (org-babel-temp-file "mermaid-"))
          (mmdc-path (executable-find "mmdc"))
          (mmdc (or ob-mermaid-cli-path
                    (if mmdc-path
@@ -91,9 +90,9 @@ For htmlLabels specifically, see URL
                            mmdc-path
                          (error "Found mmdc at %s but it's not executable" mmdc-path))
                      (error "`ob-mermaid-cli-path' is not set and mmdc is not in `exec-path'"))))
-         (cmd (concat mmdc
-                      " -i " (org-babel-process-file-name temp-file)
+         (cmd (concat (shell-quote-argument mmdc)
                       " -o " (org-babel-process-file-name out-file)
+                      " -i -"
 		      (when theme
 			(concat " -t " theme))
 		      (when background-color
@@ -114,9 +113,8 @@ For htmlLabels specifically, see URL
                         (concat " -p " (org-babel-process-file-name puppeteer-config-file)))
 		      (when cmdline
 			(concat " " cmdline)))))
-    (with-temp-file temp-file (insert body))
     (message "%s" cmd)
-    (org-babel-eval cmd "")
+    (org-babel-eval cmd body)
     nil))
 
 (provide 'ob-mermaid)
